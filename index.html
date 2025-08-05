@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0">
+  <title>縦型ディスプレイ用ページ</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .video-area, .image-area {
+      flex: 1;
+    }
+
+    .video-area iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .image-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="video-area">
+      <iframe src="https://www.youtube.com/embed/動画ID?autoplay=1&mute=1&loop=1&playlist=動画ID" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="image-area">
+      <img src="画像のURL" alt="下部画像">
+    </div>
+  </div>
+</body>
+</html>

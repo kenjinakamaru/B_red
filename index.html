@@ -2,14 +2,14 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>縦型ディスプレイ用ページ</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      width: 1080px;
-      height: 1920px;
+      height: 100%;
+      width: 100%;
       overflow: hidden;
     }
 
@@ -17,6 +17,7 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
+      width: 100vw;
     }
 
     .video-area, .image-area {
@@ -39,7 +40,7 @@
 <body>
   <div class="container">
     <div class="video-area">
-      <iframe src="https://www.youtube.com/embed/A4JpNcjeaoc?si=FopLg_vaMu3_fYZq" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/A4JpNcjeaoc?si=FopLg_vaMu3_fYZq&autoplay=1&mute=1&loop=1&playlist=A4JpNcjeaoc" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
     <div class="image-area">
       <img src="https://kenjinakamaru.github.io/B_red/qr.png" alt="下部画像">

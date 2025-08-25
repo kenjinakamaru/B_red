@@ -24,10 +24,10 @@
       flex: 1;
     }
 
-    .video-area iframe {
+    .video-area video {
       width: 100%;
       height: 100%;
-      border: none;
+      object-fit: cover; /* 全画面にフィット */
     }
 
     .image-area img {
@@ -40,12 +40,10 @@
 <body>
   <div class="container">
     <div class="video-area">
-      <iframe width="1080" height="1920"
-  src="https://www.youtube.com/embed/0cA5gQvJeAk?autoplay=1&mute=1&loop=1&playlist=0cA5gQvJeAk&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1"
-  frameborder="0"
-  allow="autoplay; encrypted-media; picture-in-picture; web-share"
-  allowfullscreen>
-</iframe>
+      <video autoplay muted loop playsinline>
+        <source src="https://kenjinakamaru.github.io/B_red/video.mp4" type="video/mp4">
+        お使いのブラウザは動画をサポートしていません。
+      </video>
     </div>
     <div class="image-area">
       <img src="https://kenjinakamaru.github.io/B_red/qr.png" alt="下部画像">

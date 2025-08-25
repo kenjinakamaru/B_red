@@ -51,3 +51,58 @@
   </div>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>縦型ディスプレイ用ページ</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .video-area, .image-area {
+      flex: 1;
+    }
+
+    .video-area iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .image-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="video-area">
+      <iframe width="1080" height="1920"
+  src="https://www.youtube.com/embed/0cA5gQvJeAk?autoplay=1&mute=1&loop=1&playlist=0cA5gQvJeAk&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1"
+  frameborder="0"
+  allow="autoplay; encrypted-media; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+    </div>
+    <div class="image-area">
+      <img src="https://kenjinakamaru.github.io/B_red/qr.png" alt="下部画像">
+    </div>
+  </div>
+</body>
+</html>

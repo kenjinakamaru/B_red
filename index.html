@@ -1,108 +1,65 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>縦型ディスプレイ用ページ</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
+    html, body { margin:0; padding:0; height:100%; width:100%; overflow:hidden; }
+    .container { display:flex; flex-direction:column; height:100vh; width:100vw; }
+    .video-area, .image-area { flex:1; position:relative; }
+    .video-area video { width:100%; height:100%; object-fit:cover; background:#000; }
+    .image-area img { width:100%; height:100%; object-fit:cover; }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      width: 100vw;
+    /* 音ONボタンのオーバーレイ */
+    .unmute-overlay {
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      background:rgba(0,0,0,0.35); color:#fff; font-size:20px; cursor:pointer;
+      user-select:none; -webkit-user-select:none;
     }
-
-    .video-area, .image-area {
-      flex: 1;
-    }
-
-    .video-area video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* 全画面にフィット */
-    }
-
-    .image-area img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .unmute-btn {
+      padding:14px 20px; border:1px solid rgba(255,255,255,.7); border-radius:9999px;
+      background:rgba(0,0,0,.4); backdrop-filter:saturate(140%) blur(2px);
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="video-area">
-      <video autoplay muted loop playsinline>
+      <video id="vid" autoplay muted loop playsinline webkit-playsinline preload="auto">
         <source src="https://kenjinakamaru.github.io/B_red/video.mp4" type="video/mp4">
         お使いのブラウザは動画をサポートしていません。
       </video>
+      <div id="overlay" class="unmute-overlay">
+        <div class="unmute-btn">🔊 音をオンにする（タップ）</div>
+      </div>
     </div>
     <div class="image-area">
       <img src="https://kenjinakamaru.github.io/B_red/qr.png" alt="下部画像">
     </div>
   </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>縦型ディスプレイ用ページ</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      width: 100vw;
-    }
+  <script>
+    const v = document.getElementById('vid');
+    const overlay = document.getElementById('overlay');
 
-    .video-area, .image-area {
-      flex: 1;
-    }
+    // 再生開始（無音）を保証
+    v.play().catch(()=>{/* 自動再生ブロック時は overlayで案内 */});
 
-    .video-area iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .image-area img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="video-area">
-      <iframe width="1080" height="1920"
-  src="https://www.youtube.com/embed/0cA5gQvJeAk?autoplay=1&mute=1&loop=1&playlist=0cA5gQvJeAk&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1"
-  frameborder="0"
-  allow="autoplay; encrypted-media; picture-in-picture; web-share"
-  allowfullscreen>
-</iframe>
-    </div>
-    <div class="image-area">
-      <img src="https://kenjinakamaru.github.io/B_red/qr.png" alt="下部画像">
-    </div>
-  </div>
+    // タップ/クリックで音ON
+    const enableSound = async () => {
+      try {
+        v.muted = false;         // ミュート解除
+        v.volume = 1.0;          // 音量MAX（必要なら調整）
+        // iOS対策：ループ中でも確実に再生を呼ぶ
+        await v.play();
+        overlay.style.display = 'none';
+      } catch (e) {
+        console.warn('再生に失敗:', e);
+      }
+    };
+    overlay.addEventListener('click', enableSound);
+    overlay.addEventListener('touchstart', (e)=>{ e.preventDefault(); enableSound(); }, {passive:false});
+  </script>
 </body>
 </html>
